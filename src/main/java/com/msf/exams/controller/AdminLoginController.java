@@ -49,13 +49,7 @@ public class AdminLoginController {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		
-//		try {		 
-//			String jsonString = mapper.writeValueAsString(mongotemplate.findOne(query, AdminLogin.class));
-//			} catch(JsonProcessingException e) {
-//				e.printStackTrace();
-//			}
-//		
+			
 		return response;		
 	}
 }
