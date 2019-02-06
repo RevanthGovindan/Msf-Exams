@@ -1,10 +1,13 @@
 package com.msf.exams.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +34,8 @@ public class QuestionsController {
 	QuestionsRepo questionrepo;
 	@Autowired
 	MongoTemplate mongotemplate;
-
+	private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
+	
 	@PostMapping("/addquestion")
 	public ResponseEntity<QuestionRes> addquestion(@RequestBody Question question) {
 		QuestionRes response = new QuestionRes();
@@ -45,13 +49,13 @@ public class QuestionsController {
 		return questionrepo.findAll();
 	}
 	
-//	@GetMapping("/listquestionnew")
-//	public List<Question> listQuestionsNew(){
-//		Map<String, Object> dataMap = new HashMap<String, Object>();
-//		List<Question> list = questionrepo.findAll();
-//		
-//		return list;
-//	}
+	@GetMapping("/listquestion/{pagenum}/{noofquestions}")
+	public List<Question> listQuestionsPagination(@PathVariable int pagenum,@PathVariable int noofquestions){
+		Pageable pageable = PageRequest.of(pagenum, noofquestions);
+		Page<Question> questions = questionrepo.findAll(pageable);
+		List<Question> questionsList = questions.getContent();
+		return questionsList;		
+	}	
 	
 	@DeleteMapping("/deletequestion/{id}")
 	public ResponseEntity<QuestionRes> deleteQuestion(@PathVariable String id){
@@ -63,6 +67,7 @@ public class QuestionsController {
 
 	@PutMapping("/editquestion")
 	public ResponseEntity<QuestionRes> editQuestion(@RequestBody Question question){
+		LOGGER.info(question.toString());
 		QuestionRes response = new QuestionRes();
 		questionrepo.save(question);
 		response.message = "updated";

@@ -25,7 +25,7 @@ public class Question {
 	public Question() {
 	}
 	
-	public Question(String id, String question, String questionType, List<QuestionChoices> choices,
+	public Question(String question, String questionType, List<QuestionChoices> choices,
 			String correctanswer,String domain) {
 		super();
 		this.question = question;
