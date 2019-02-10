@@ -1,0 +1,86 @@
+package com.msf.exams.model;
+
+import java.util.UUID;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection="candiate")
+public class CandidateSignup {
+       
+	@Id
+	private String id = UUID.randomUUID().toString();;
+	private String candiateName;
+	private String candiatePhoneNo;
+	private String candiateEmail;
+	private String referencedBy;
+	private String yearOfExperience;
+	private String passedOutYear;
+	
+	public CandidateSignup(String candiateName, String candiatePhoneNo, String candiateEmail, String referencedBy,
+			String yearOfExperience, String passedOutYear) {
+		super();
+		this.candiateName = candiateName;
+		this.candiatePhoneNo = candiatePhoneNo;
+		this.candiateEmail = candiateEmail;
+		this.referencedBy = referencedBy;
+		this.yearOfExperience = yearOfExperience;
+		this.passedOutYear = passedOutYear;
+	}
+	
+	public CandidateSignup() {
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public String getCandiateName() {
+		return candiateName;
+	}
+
+	public void setCandiateName(String candiateName) {
+		this.candiateName = candiateName;
+	}
+
+	public String getCandiatePhoneNo() {
+		return candiatePhoneNo;
+	}
+
+	public void setCandiatePhoneNo(String candiatePhoneNo) {
+		this.candiatePhoneNo = candiatePhoneNo;
+	}
+
+	public String getCandiateEmail() {
+		return candiateEmail;
+	}
+
+	public void setCandiateEmail(String candiateEmail) {
+		this.candiateEmail = candiateEmail;
+	}
+
+	public String getReferencedBy() {
+		return referencedBy;
+	}
+
+	public void setReferencedBy(String referencedBy) {
+		this.referencedBy = referencedBy;
+	}
+
+	public String getYearOfExperience() {
+		return yearOfExperience;
+	}
+
+	public void setYearOfExperience(String yearOfExperience) {
+		this.yearOfExperience = yearOfExperience;
+	}
+
+	public String getPassedOutYear() {
+		return passedOutYear;
+	}
+
+	public void setPassedOutYear(String passedOutYear) {
+		this.passedOutYear = passedOutYear;
+	}
+       
+}
