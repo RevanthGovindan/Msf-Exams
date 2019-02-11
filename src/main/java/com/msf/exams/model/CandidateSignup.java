@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class CandidateSignup {
        
 	@Id
-	private String id = UUID.randomUUID().toString();;
+	private String id = UUID.randomUUID().toString();
 	private String candidateName;
 	private String candidatePhoneNo;
 	private String candidateEmail;
