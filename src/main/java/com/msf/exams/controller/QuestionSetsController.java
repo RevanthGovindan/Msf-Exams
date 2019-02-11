@@ -8,6 +8,8 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -51,13 +53,15 @@ public class QuestionSetsController {
 	public ResponseEntity<Object> listsets() {
 		Query query = new Query();
 		List<QuestionSets> qsets = new ArrayList<QuestionSets>();
-		qsets = questionsetsrepo.findAll();
+		query.with(new Sort(Sort.Direction.DESC,"createdAt"));
+		qsets = mongotemplate.find(query, QuestionSets.class);
 		List<Object> resultList = new ArrayList<>();
 		try {
 			for (QuestionSets res : qsets) {
 				Map<String, Object> map = new HashMap<String, Object>();
 				map.put("id", res.getId());
 				map.put("setname", res.getSetname());
+				map.put("createdAt", res.getCreatedAt());
 				resultList.add(map);
 			}
 		} catch (Exception e) {
@@ -80,7 +84,7 @@ public class QuestionSetsController {
 		Query query = new Query();
 		QuestionRes response = new QuestionRes();
 		query.addCriteria(Criteria.where("id").is(setid));
-		Update update = new Update();
+		Update update = new Update(); 
 		update.pull("questions", new Query(Criteria.where("id").is(questionid)));
 		if(mongotemplate.updateFirst(query,update, QuestionSets.class) != null){
 			response.message = "deleted";
@@ -115,12 +119,11 @@ public class QuestionSetsController {
 		LOGGER.info(setid);
 		query.addCriteria(Criteria.where("id").is(setid));
 		update.push("questions").each(questions);
-//		for(Question question:questions) {
-//			LOGGER.info(question.toString());
-//			update.add ("questions", question);
-//			
-//		}	
-		mongotemplate.updateFirst(query, update, QuestionSets.class);
+		if(mongotemplate.updateFirst(query, update, QuestionSets.class) != null) {
+			response.message = "inserted";
+		} else {
+			response.message = "failed";
+		}
 		return new ResponseEntity<Object>(response, HttpStatus.OK);
 	}
 	
