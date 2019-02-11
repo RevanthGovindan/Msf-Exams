@@ -29,13 +29,7 @@ public class CandidateSignupController {
 	
 	@PostMapping("/candidate/signup")
 	public ResponseEntity<Object> candidateSignup(@RequestBody CandidateSignup request){
-		QuestionRes response = new QuestionRes();
-		if(candidaterepo.save(request) != null) {
-			response.message = "inserted";
-		} else {
-			response.message = "failed";
-		}
-		return new ResponseEntity<Object>(response, HttpStatus.CREATED);
+		return new ResponseEntity<Object>(candidaterepo.save(request), HttpStatus.CREATED);
 	}
 	
 	
