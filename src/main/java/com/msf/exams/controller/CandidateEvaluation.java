@@ -41,13 +41,18 @@ public class CandidateEvaluation {
 		List<CandidateQuestions> questions =  request.getQuestions();
 		for(CandidateQuestions question:questions) {
 			Query query = new Query();
+			Query query2 = new Query();
 			String qid = question.getId();
 			Question actualData = mongotemplate.findOne(query.addCriteria(Criteria.where("id").is(qid)), Question.class);
+			question.setQuestion(actualData.getQuestion());
+			query2.addCriteria(Criteria.where("id").is(qid).where("questions").elemMatch((Criteria.where("id").is(question.getSubmittedanswer()))));
+			mongotemplate.findOne(query2, Question.class);
+			//question.setSubmittedanswer();
 			if((actualData.getCorrectanswer()).equals(question.getSubmittedanswer())) {
 				marks+=1;
 			}
 		}		
-		request.setMarks(marks);
+		//request.setMarks(marks);
 		return new ResponseEntity<Object>(candidaterepo.save(request), HttpStatus.CREATED);
 	}
 	
