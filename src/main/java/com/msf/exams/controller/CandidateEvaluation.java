@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.msf.exams.model.CandidateQuestions;
 import com.msf.exams.model.CandidateSubmit;
 import com.msf.exams.model.Question;
+import com.msf.exams.model.QuestionChoices;
 import com.msf.exams.repository.CandidateEvaluationRepo;
 
 
@@ -41,18 +42,20 @@ public class CandidateEvaluation {
 		List<CandidateQuestions> questions =  request.getQuestions();
 		for(CandidateQuestions question:questions) {
 			Query query = new Query();
-			Query query2 = new Query();
 			String qid = question.getId();
+			String submittedOption = question.getSubmittedoption();
 			Question actualData = mongotemplate.findOne(query.addCriteria(Criteria.where("id").is(qid)), Question.class);
 			question.setQuestion(actualData.getQuestion());
-			query2.addCriteria(Criteria.where("id").is(qid).where("questions").elemMatch((Criteria.where("id").is(question.getSubmittedanswer()))));
-			mongotemplate.findOne(query2, Question.class);
-			//question.setSubmittedanswer();
-			if((actualData.getCorrectanswer()).equals(question.getSubmittedanswer())) {
+			for(QuestionChoices choice:actualData.getChoices()) {
+				if(choice.getId().equals(submittedOption)) {
+					question.setSubmittedanswer(choice.getDisplaytext());
+				}
+			}
+			if((actualData.getCorrectanswer()).equals(question.getSubmittedoption())) {
 				marks+=1;
 			}
 		}		
-		//request.setMarks(marks);
+		request.setMarks(marks);
 		return new ResponseEntity<Object>(candidaterepo.save(request), HttpStatus.CREATED);
 	}
 	
