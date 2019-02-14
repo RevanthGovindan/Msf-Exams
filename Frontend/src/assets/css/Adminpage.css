@@ -1,0 +1,453 @@
+/* ========= Admin page styles here ========== */
+
+.admin-page{
+    width: 100%;
+    height: 100%;
+    background: #f5f5f5;
+}
+
+/* =========== Admin header starts=============== */
+
+.admin-page-header{
+    width: 100%;
+    height: 80px;
+    background: #f1f1f1;
+    display: flex;
+    justify-content: space-between;
+}
+.admin-page-header .logo-section,
+.admin-page-header .domain-dropdown{
+    width: auto;
+    display:flex;
+    align-items:center;
+    padding:10px;
+}
+.logout-png{
+    width:50px;
+    cursor:pointer;
+}
+/* =========== Admin header ends=============== */
+
+/* =========== Admin view starts=============== */
+.admin-page-container{
+    width:100%;
+    height:calc(100% - 80px);
+}
+.admin-subheader{
+    width: 100%;
+    height: 40px;
+    background: #cfc7c7;
+    display: flex;
+    align-items:center;
+    list-style-type:none;
+    padding:0px;
+    margin:0px;
+}
+.admin-subheader > li.subheader{
+    cursor:pointer;
+    padding:10px;
+}
+.admin-subheader > li.subheader:hover{
+    color:#ffff;
+}
+.admin-subheader > li.subheader.active{
+    color:#ffff;
+    }
+.admin-subheader .active{
+    cursor:pointer;
+    background:#2d2a2a;
+    color:#ffff;
+
+    }
+.admin-display-container{
+    width: 100%;
+    height: calc(100% - 40px);
+    color: grey;
+    background-color: white;
+}
+
+/* =========== Admin view ends=============== */
+
+
+/* =========== Questions view starts=============== */
+
+.question-container{
+    width: 100%;
+    height: 100%;
+}
+.buttons-cont{
+    width: 100%;
+    height: 50px;
+    text-align: right;
+    padding: 10px;
+}
+.add-utton{
+    color: white;
+    background: #4daf76 !important;
+    border-radius: 10px;
+    padding: 5px 10px;
+    border:2px solid #4daf76;
+    cursor:pointer;
+}
+.question-lists{
+    width: 100%;
+    height: calc(100% - 50px);
+    background-color: white;
+    overflow-y:auto;
+    user-select:none;
+}
+.deleteOption{
+    cursor:pointer;
+}
+.add-question-model{
+    width: 100%;
+    height: 290px;
+    overflow-y: auto;
+    padding-top:15px;
+}
+.backdrop{
+    position:fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.3);
+    padding: 50px;
+
+}
+.modal{
+    background-color: #fff;
+    border-radius: 5px;
+    max-width: 500px;
+    max-height: 400px;
+    margin: 0 auto;
+    padding: 15px;
+    box-shadow:inset 0 0 10px #000000;
+}
+.question-header{
+    text-align: center;
+}
+/* .question-section,.answer-section,.severity-section{
+    padding:10px;
+    
+} */
+.question-section {
+    padding:10px;
+}
+.question-section > .question-label{
+    width: 200px;
+    text-align: right;
+    display: inline-block;
+    padding-right: 10px;
+}
+.question-section .answer-png{
+    display: inline-block;
+    height: 20px;
+}
+.question-section .addChoice-png{
+    
+    height: 20px;
+    width: 20px;
+    cursor:pointer;
+}
+.question-section .answer-png img{
+    width: 25px;
+    height: 25px;
+    
+}
+/* .add-question-model  textarea{
+     border: 0px !important; 
+    border-bottom: 1px solid #ccc !important;
+    border-radius: 0px !important; 
+    width: 100%;
+    padding: 0px !important;
+    max-height:170px;
+    max-width:436px;
+    min-height:50px;
+    height:auto;
+    overflow-y:auto;
+    resize:none;
+} */
+.question-footer{
+    display:flex;
+    width:100%;
+    justify-content: space-evenly;
+}
+.close-model{
+    color: white;
+    background: #3C72BA !important;
+    border-radius: 10px;
+    padding: 5px 40px;
+    border:2px solid #3C72BA;    
+}
+.save-model{
+    color: white;
+    background: #4daf76 !important;
+    border-radius: 10px;
+    padding: 5px 40px;
+    border:2px solid #4daf76;    
+}
+.question-sec{
+    width:100%;
+    padding:10px;
+    display: flex;
+    justify-content: space-between;
+}
+.quesshow{
+    flex: 1;
+    padding-right: 25px;
+    font-size:16px;
+}
+.ques-choice{
+    flex: 1;
+}
+.ques-choice .choice-section{
+    display:flex;
+    flex-wrap:wrap;
+    text-align:left;
+    padding-top:10px;
+}
+.options-container{
+    display: inline-block;
+    padding: 5px 10px;
+    border: none;
+    min-width: 100px;
+}
+.options-container > input {
+    border:none !important;
+    border-bottom:1px solid #ccc !important;;
+    border-radius:0px !important;
+}
+.display-choice-container{
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    align-items: center;
+}
+.choice-list{
+    width:50%;
+}
+.question-sec:nth-child(odd){
+    background-color:white;
+}
+.question-sec:nth-child(even){
+    background-color:rgb(255, 248, 248);
+}
+.action-btns{
+    display: flex;
+    align-items: center;
+    width: 210px;
+    justify-content: space-between;
+}
+.edit-btn{
+    background: #4daf76 !important;
+    border-radius: 10px;
+    color: white;
+    min-width:100px;
+    width:auto;
+    height:30px;
+    border:2px solid #4daf76;
+}
+.delete-btn{
+    color: white;
+    background: #3C72BA !important;
+    border-radius: 10px;
+    min-width:100px;
+    width:auto;
+    height:30px;
+    border:2px solid #3C72BA; 
+}
+.choice-section{
+    text-align:center;
+}
+
+.inLineMessage{
+    width: 100%;
+    text-align: center;
+    height: 100%;
+    font-size: 16px;
+    font-weight: bold;
+    padding-top:30px;
+}
+
+
+/* ========================        Question ends          ============================= */
+
+/* ========================        ListSet starts          ============================= */
+
+.exam-container{
+    width:100%;
+    display:flex;
+    height:100%;
+}
+.exam-left-container{
+    width:220px;
+    height:100%;
+    background:#e5e9ec;
+}
+.exam-right-container{
+    flex:1;
+    height: 100%;
+}
+.createbutton{
+    width: 100%;
+    height:50px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+.exam-create-btn{
+    color: white;
+    background: #4daf76 !important;
+    border-radius: 10px;
+    padding: 5px 10px;
+    border:2px solid #4daf76;
+}
+.delete-set img{
+    width:30px;
+    height:30px;
+    border-radius:15px;
+}
+.exam-data-list{
+    width: 100%;
+    height:calc(100% - 50px);
+    overflow-y:auto;
+}
+.examsection{
+    width: 100%;
+    padding: 10px 5px;
+    display:flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #adb7be;
+    cursor:pointer;
+}
+.exam-right-container .add-ques-btn{
+    color: white;
+    background: #4daf76 !important;
+    border-radius: 10px;
+    padding: 5px 10px;
+    border:2px solid #4daf76;
+}
+.exam-right-container .showlist-header{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    height: 50px;
+    background-color: #F5E7E7;
+}
+.exam-right-container .showlist-body{
+    width: 100%;
+    height: calc(100% - 50px);
+    overflow-y:auto;
+}
+.exam-right-container .listset-question-sec{
+    display:flex;
+    justify-content: space-between;
+    padding:10px;
+}
+.exam-right-container .list-ques-delete{
+    color: white;
+    background: #3C72BA !important;
+    border-radius: 10px;
+    min-width:100px;
+    width:auto;
+    height:30px;
+    border:2px solid #3C72BA; 
+}
+.exam-right-container .listset-question-sec:nth-child(odd){
+    background-color:white;
+}
+.exam-right-container .listset-question-sec:nth-child(even){
+    background-color:rgb(255, 248, 248);
+}
+/* ========================        ListSet ends          ============================= */
+/* ========================        AddQuestionSet starts          ============================= */
+.overlay{
+    position:fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.3);
+    padding: 50px;
+
+}
+.add-modal{
+    background-color: #fff;
+    border-radius: 5px;
+    max-width: 1000px;
+    max-height: 440px;
+    margin: 0 auto;
+    padding: 15px;
+    box-shadow:inset 0 0 10px #000000;
+}
+.add-modal-header{
+    width:100%;
+    height:60px;
+    text-align:center;
+    font-size: 16px;
+    font-weight:bold;
+}
+.add-modal-body{
+    width:100%;
+    height:300px;
+    overflow-y:auto;
+}
+.add-modal-body .ques-select-section{
+    padding:10px;
+    min-height: 50px;
+}
+.add-modal-body .ques-select-section:nth-child(odd){
+    background-color:white;
+}
+.add-modal-body .ques-select-section:nth-child(even){
+    background-color:rgb(255, 248, 248);
+}
+.add-modal-footer{
+    width:100%;
+    height:50px;
+    display:flex;
+    justify-content: space-between;
+    padding:10px;
+}
+.add-modal .add-model-cancel{
+    color: white;
+    background: #3C72BA !important;
+    border-radius: 10px;
+    min-width:100px;
+    width:auto;
+    height:30px;
+    border:2px solid #3C72BA; 
+}
+.add-modal .add-model-submit{
+    color: white;
+    background: #4daf76 !important;
+    border-radius: 10px;
+    padding: 5px 10px;
+    border:2px solid #4daf76;
+}
+.add-modal .qustion-checkbox{
+    display: flex;
+    flex-wrap: wrap;
+}
+.add-modal .question-options{
+    display: flex;
+    flex-wrap: wrap;
+}
+.add-modal .choice-list{
+    width:50%;
+    padding:5px 10px;
+}
+.setName-sec{
+    display: flex;
+    justify-content: space-between;
+    padding:10px;
+}
+.activeTab{
+    background: #2d2a2a;
+    cursor:pointer;
+    color:white
+}
+/* ========================        AddQuestionSet ends          ============================= */
+

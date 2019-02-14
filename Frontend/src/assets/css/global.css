@@ -1,0 +1,169 @@
+/* =================================================== */
+/* app base */
+
+* {
+    box-sizing: border-box;
+}
+
+.app {
+    height: 100%;
+    overflow: hidden;
+    font-family: Montserrat;
+    font-size:14px;
+}
+
+.app.scrollable {
+    overflow-x: auto;
+    overflow-y: auto;
+}
+
+.app-mobile {
+    height: 100%;
+    padding: 25px;
+    padding-top: 0px;
+    background: #f5f5f5;
+    color: #808080;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* =================================================== */
+/* input - text, password */
+
+
+input[type='text'], input[type="password"] {
+    /* background: #fff;
+    color: #000;
+    /* padding: 5px 8px; 
+    padding:0px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 400; */
+    padding: 5px 0px;
+    border: 0 !important; 
+    outline: 0 !important; ;
+    background: transparent !important; ;
+    border-bottom: 1px solid grey !important; ;
+    border-radius:0px !important; 
+}
+
+input[type='text']:focus, input[type="password"]:focus {
+    outline: none;
+}
+input[type='text']:focus, input[type="password"]:focus {
+  border-bottom:2px solid rgb(103, 58, 183) !important;
+}
+input[type='text']:focus label, input[type="password"]:focus label{
+ color:red;
+}
+
+/* =================================================== */
+/* button - Button */
+
+button[type='button'] {
+    color: #000;
+    padding: 6px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+}
+button{
+    cursor:pointer;
+}
+button[type='button']:hover:enabled {
+   box-shadow:0 2px 2px 0 rgba(0, 0, 0, 0.29);
+}
+
+button[type='button']:active {}
+
+button[type='button']:focus {
+    outline: none;
+}
+
+button[type='button']:disabled {
+    opacity: 0.4;
+    cursor: default;
+}
+
+
+/* =================================================== */
+
+/* Error Message styles here */
+
+.backdrop{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.3);
+    padding: 50px;
+}
+.errorModel{
+    background-color: #fff;
+    border-radius: 5px;
+    max-width: 320px;
+    min-height: 100px;
+    height: auto;
+    margin: 0 auto;
+    padding: 10px;;
+}
+.instructionModel{
+    background-color: #fff;
+    border-radius: 5px;
+    max-width: 500px;
+    /* min-height: 150px; */
+    height: auto;
+    margin: 0 auto;
+    padding: 10px;
+}
+.instructionModel .buttons{
+    text-align: center;
+    padding-top:10px;
+}
+.instructionModel .buttons .close-btn
+{
+    color: white;
+    background: #4daf76 !important;
+    border-radius: 10px;
+    padding: 5px 10px;
+    border:2px solid #4daf76;
+    cursor:pointer;
+}
+.errorHeader{
+    width: 100%;
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+.closeError{
+    cursor:pointer;
+}
+.errorBody{
+    display:flex;
+}
+.errorBody .message-icon, .errorBody .message-icon img{
+    width:50px;
+    height:50px;
+}
+.errorBody .error-message{
+    flex:1;
+    text-align:center;
+}
+.errorFooter{
+    width:100%;
+    height: 30px;
+    text-align:right;
+    padding-top:10px;
+}
+.close-btn{
+    text-align: right;
+    cursor: pointer;
+    background: #ffb3b3;
+    border: #ffb3b3;
+    border-radius: 5px;
+}

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.msf.exams.model.CandidateQuestions;
 import com.msf.exams.model.CandidateSubmit;
 import com.msf.exams.model.Question;
+import com.msf.exams.model.QuestionChoices;
 import com.msf.exams.repository.CandidateEvaluationRepo;
 
 
@@ -42,8 +43,15 @@ public class CandidateEvaluation {
 		for(CandidateQuestions question:questions) {
 			Query query = new Query();
 			String qid = question.getId();
+			String submittedOption = question.getSubmittedoption();
 			Question actualData = mongotemplate.findOne(query.addCriteria(Criteria.where("id").is(qid)), Question.class);
-			if((actualData.getCorrectanswer()).equals(question.getSubmittedanswer())) {
+			question.setQuestion(actualData.getQuestion());
+			for(QuestionChoices choice:actualData.getChoices()) {
+				if(choice.getId().equals(submittedOption)) {
+					question.setSubmittedanswer(choice.getDisplaytext());
+				}
+			}
+			if((actualData.getCorrectanswer()).equals(question.getSubmittedoption())) {
 				marks+=1;
 			}
 		}		

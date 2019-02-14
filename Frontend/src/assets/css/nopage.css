@@ -1,0 +1,16 @@
+/* =================================================== */
+/* NoPage */
+
+.nopage {
+    height: 100%;
+    background: #fafafa;
+    color: rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 6em;
+    font-weight: 800;
+    letter-spacing: 12px;
+}
+
+/* =================================================== */
