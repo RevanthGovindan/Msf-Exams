@@ -25,7 +25,7 @@ public class ResultAnalysis {
 	
 	@GetMapping("/admin/results")
 	public ResponseEntity<Object> resultAnalysis(){
-		Query query = new Query();
+		//Query query = new Query();
 		return new ResponseEntity<Object>(mongotemplate.findAll(CandidateSubmit.class),HttpStatus.OK);
 	}
 	

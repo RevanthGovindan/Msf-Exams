@@ -43,6 +43,13 @@ public class QuestionsController {
 		response.message = "inserted";
 		return new ResponseEntity<QuestionRes>(response, HttpStatus.CREATED);
 	}
+	@PostMapping("/bulkupload")
+	public ResponseEntity<QuestionRes> bulkQuestion(@RequestBody List<Question> question) {
+		QuestionRes response = new QuestionRes();
+		questionrepo.saveAll(question);
+		response.message = "inserted";
+		return new ResponseEntity<QuestionRes>(response, HttpStatus.CREATED);
+	}
 
 	@GetMapping("/listquestion")
 	public List<Question> listQuestions() {

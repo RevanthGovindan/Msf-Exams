@@ -59,7 +59,7 @@ class Adminview extends Component {
     //==========================================================
     // Question List handling
     getListQuestions(){
-       
+       console.log("came")
         placeGetRequest(LoginAPIExtensions.ListQuestion, this.parseaGetQuestionsResponse, this.parseGetQuestionsError);
     }
 

@@ -9,7 +9,6 @@ class ErrorMessage extends Component {
             messagebody :this.props.errorinfo,
             error:this.props.errorIcon
         }
-        console.log("body",this.state.messagebody)
     }
 
 

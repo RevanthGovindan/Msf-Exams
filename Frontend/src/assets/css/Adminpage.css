@@ -127,6 +127,20 @@
 .question-header{
     text-align: center;
 }
+
+.ques-buttons{
+   display: flex;
+   justify-content: space-between;
+   width: 22%;
+   float: right;
+}
+
+.question-upload-input{
+    display:flex;
+    justify-content: center;
+    padding-top: 20px;
+}
+
 /* .question-section,.answer-section,.severity-section{
     padding:10px;
     

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import AddQuestioncomp from './AddQuestioncomp';
 import Questionlistcomp from './Questionlistcomp';
+import FileUpload from './FileUpload';
 class Questionscomp extends Component {
     constructor() {
         super();
@@ -9,7 +10,8 @@ class Questionscomp extends Component {
             listques: [],
             editques: false,
             editqdata: '',
-            editid: ''
+            editid: '',
+            isUpload:false
         };
 
     }
@@ -50,21 +52,38 @@ class Questionscomp extends Component {
 
     }
 
+    bulkUploadModal=()=>{
+        this.setState((prevState)=>{
+            return{
+                isUpload : !prevState.isUpload
+            }
+        });
+    }
 
     render() {
 
         return (
             <div className="question-container">
-                <div className="buttons-cont">
-                    <button className="add-utton" onClick={this.openModal.bind(this)}>Add Question</button>
+                <div className="buttons-cont ques-buttons">
+                    <div>
+                        <button className="add-utton" onClick={this.bulkUploadModal.bind(this)}>CSV Bulk Upload</button>
+                    </div>
+                    <div>
+                        <button className="add-utton" onClick={this.openModal.bind(this)}>Add Question</button>
+                    </div>
                 </div>
+
                 <Questionlistcomp listarraydata={this.state.listques} editOpen={this.editModal.bind(this)} callQuestions={this.props.callList} />
 
                 {this.state.isOpen ?
-                    <AddQuestioncomp show={this.state.isOpen} onClose={this.closeModal} handlerFromParant={this.handleData} editData={this.state.editqdata} editcon={this.state.editques} editid={this.state.editid} callQuestions={this.props.callList}>
+                    <AddQuestioncomp  onClose={this.closeModal} handlerFromParant={this.handleData} editData={this.state.editqdata} editcon={this.state.editques} editid={this.state.editid} callQuestions={this.props.callList}>
                     </AddQuestioncomp>
                     :
                     ''
+                }
+                {
+                    this.state.isUpload ? 
+                    <FileUpload callQuestions={this.props.callList} bulkUploadModal={this.bulkUploadModal}/>:''
                 }
 
             </div>

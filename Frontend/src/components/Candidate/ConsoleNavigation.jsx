@@ -13,17 +13,17 @@ class ConsoleNavigation extends Component {
             questionNumber: 1,
             isDisabledNext: false,
             isDisabledPrev: true,
-            timer: null,
+            timer: '',
             options: [],
             allAnswers: [],
-            showQuesAnswers :[],
+            showQuesAnswers: [],
             isSubmit: false,
-            name:'',
-            number:'',
-            email:'',
-            id:'',
-            questionId:'',
-            result:[]
+            name: '',
+            number: '',
+            email: '',
+            id: '',
+            questionId: '',
+            result: []
         }
 
     }
@@ -35,36 +35,21 @@ class ConsoleNavigation extends Component {
         this.props.retriveQuestionId(this.state.questionId);
         //console.log("questionId",this.state.questionId)
         var candidateData = window.sessionStorage.getItem("key");
-        candidateData =  JSON.parse(candidateData)      
+        candidateData = JSON.parse(candidateData)
         this.setState({
             answers: this.props.sendAllanswers,
-            name:candidateData.candidateName,
-            number:candidateData.candidatePhoneNo,
-            email:candidateData.candidateEmail,
-            id:candidateData.id
+            name: candidateData.candidateName,
+            number: candidateData.candidatePhoneNo,
+            email: candidateData.candidateEmail,
+            id: candidateData.id
         })
-        this.Countdown = setInterval(() => {
-          this.setState({
-            timer:this.state.timer-1
-          })
-          if (this.state.timer === 0) {
-              this.SubmitInterview();
-              this.setState({
-                isSubmit:true
-              })
-            clearInterval(this.Countdown);
-          }else{
-              this.setState({
-                  isSubmit:false
-              })
-          }
-        }, 1000);    
+
     }
     componentWillReceiveProps(newprops) {
 
         this.setState({
             allAnswers: newprops.submitPaper,
-            showQuesAnswers:newprops.dispalyQuesAnswers
+            showQuesAnswers: newprops.dispalyQuesAnswers
         })
     }
     componentWillUnmount() {
@@ -76,7 +61,7 @@ class ConsoleNavigation extends Component {
             showQuestion: question.question,
             questionNumber: index + 1,
             options: question.choices,
-            questionId:question.id,
+            questionId: question.id,
             isDisabledPrev: false,
             isDisabledNext: false
         }, () => {
@@ -85,7 +70,7 @@ class ConsoleNavigation extends Component {
             this.props.retriveOptions(this.state.options);
             this.props.retriveQuestionId(this.state.questionId);
         })
-       
+
     }
     //==============
     gotoNextQuestion() {
@@ -106,12 +91,12 @@ class ConsoleNavigation extends Component {
             var questionshow = currentQues;
             var nextquesshow = this.state.examQuestions[questionshow].question;
             var options = this.state.examQuestions[questionshow].choices;
-            var questionId =  this.state.examQuestions[questionshow].id;
+            var questionId = this.state.examQuestions[questionshow].id;
             this.setState({
                 questionNumber: nextQues,
                 showQuestion: nextquesshow,
                 options: options,
-                questionId:questionId
+                questionId: questionId
             }, () => {
                 this.props.retriveQuestion(this.state.showQuestion);
                 this.props.retriveQuesNo(this.state.questionNumber);
@@ -119,7 +104,7 @@ class ConsoleNavigation extends Component {
                 this.props.retriveQuestionId(this.state.questionId);
             })
         }
-        
+
     }
     gotoPrevQuestion() {
         this.setState({
@@ -137,12 +122,12 @@ class ConsoleNavigation extends Component {
             })
             var nextquesshow = this.state.examQuestions[nextQues - 1].question;
             var options = this.state.examQuestions[nextQues - 1].choices;
-            var questionId =  this.state.examQuestions[nextQues - 1].id;
+            var questionId = this.state.examQuestions[nextQues - 1].id;
             this.setState({
                 questionNumber: nextQues,
                 showQuestion: nextquesshow,
                 options: options,
-                questionId:questionId
+                questionId: questionId
             }, () => {
                 this.props.retriveQuestion(this.state.showQuestion);
                 this.props.retriveQuesNo(this.state.questionNumber);
@@ -150,7 +135,7 @@ class ConsoleNavigation extends Component {
                 this.props.retriveQuestionId(this.state.questionId);
             })
         }
-        
+
     }
     //===============================================================
     getExamQuestions = () => {
@@ -158,23 +143,39 @@ class ConsoleNavigation extends Component {
     }
 
     parseaGetExamQuestionResponse = (respObj) => {
-        console.log("examquestionsResponse", respObj)
+        let totalseconds = parseInt(respObj.duration);
+        let hr,min,sec;
+        this.Countdown = setInterval(() => {
+            hr = Math.floor(totalseconds/3600);
+            min = Math.floor((totalseconds/60) - (60 * hr));
+            sec = Math.floor((totalseconds -((min * 60) + (hr * 3600))));
+            totalseconds= totalseconds - 1;
+            this.setState({
+                timer: hr+'H:'+min+'M:'+sec+'S'
+            })
+            if (totalseconds <= 0) {
+                clearInterval(this.Countdown);
+                this.SubmitInterview();
+                this.setState({
+                    isSubmit: true
+                });
+            }
+        }, 1000);
         this.setState({
             examQuestions: respObj.questions,
             showQuestion: respObj.questions[0].question,
             questionNumber: 1,
             isDisabledNext: false,
             isDisabledPrev: true,
-            timer: respObj.duration,
             options: respObj.questions[0].choices,
-            questionId:respObj.questions[0].id
+            questionId: respObj.questions[0].id
 
         }, () => {
             this.props.retriveQuestion(this.state.showQuestion);
             this.props.retriveQuesNo(this.state.questionNumber);
             this.props.retriveOptions(this.state.options);
             this.props.retriveQuestionId(this.state.questionId);
-     
+
         })
     }
     parseGetExamQuestionError = (error) => {
@@ -192,44 +193,44 @@ class ConsoleNavigation extends Component {
     }
     //==============================================================
     SubmitInterview = () => {
-      clearInterval(this.Countdown);
-       var answers = this.state.allAnswers;
-       var showQuestionsAnswers = this.state.showQuesAnswers;
-       var showQuestionsAnswersResult = [];
-       for(var j in showQuestionsAnswers){
-        var quesAns = {
-            question: j,
-            answer:showQuestionsAnswers[j]
+        clearInterval(this.Countdown);
+        var answers = this.state.allAnswers;
+        var showQuestionsAnswers = this.state.showQuesAnswers;
+        var showQuestionsAnswersResult = [];
+        for (var j in showQuestionsAnswers) {
+            var quesAns = {
+                question: j,
+                answer: showQuestionsAnswers[j]
             }
             showQuestionsAnswersResult.push(quesAns);
-       }       
-       var result = [];
-       for(var i in answers){
-        var obj = {
-            id: i,
-            submittedoption:answers[i]
+        }
+        var result = [];
+        for (var i in answers) {
+            var obj = {
+                id: i,
+                submittedoption: answers[i]
             }
-              result.push(obj);
-       }
+            result.push(obj);
+        }
         this.setState({
             isSubmit: true,
-            allAnswers:result,
-            showQuesAnswers:showQuestionsAnswersResult
+            allAnswers: result,
+            showQuesAnswers: showQuestionsAnswersResult
         })
         var reqdata = {
-            candidateEmail:this.state.email,
-            candidateName:this.state.name,
-            candidatePhoneNo:this.state.number,
-            id:this.state.id,
-            questions:result
+            candidateEmail: this.state.email,
+            candidateName: this.state.name,
+            candidatePhoneNo: this.state.number,
+            id: this.state.id,
+            questions: result
         }
-        console.log("reqdata",reqdata);
+        console.log("reqdata", reqdata);
         placePostRequest(CandidateAPIExtensions.SubmitExam, reqdata, this.parseSubmitTestResponse.bind(this), this.parseSubmitTestError.bind(this));
     }
-    parseSubmitTestResponse = (respobj) =>{
+    parseSubmitTestResponse = (respobj) => {
         console.log("submitResponse", respobj)
     }
-    parseSubmitTestError = (error) =>{
+    parseSubmitTestError = (error) => {
         console.log("submitError", error)
     }
 

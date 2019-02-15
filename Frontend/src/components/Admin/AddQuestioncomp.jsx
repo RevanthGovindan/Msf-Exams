@@ -6,7 +6,7 @@ import { LoginAPIExtensions } from '../../model/serviceparams';
 import ErrorMessage from '../../screens/others/ErrorMessage';
 import addChoice from '../../assets/images/addChoice.png';
 import answershow from '../../assets/images/dropdown.jpeg';
-
+import FileUpload from './FileUpload';
 class AddQuestioncomp extends Component {
     constructor(props) {
         super(props);
@@ -380,8 +380,6 @@ class AddQuestioncomp extends Component {
 
     //============================
     render() {
-
-        if (this.props.show === true) {
             return (
                 <div className="backdrop">
                     <div className="modal">
@@ -473,11 +471,6 @@ class AddQuestioncomp extends Component {
                     </div>
                 </div>
             );
-        }
-        else {
-            return null
-        }
-
     }
 }
 

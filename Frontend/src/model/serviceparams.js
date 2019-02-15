@@ -7,7 +7,7 @@ import { AppEnvironments } from '../common/AppSettings';
 export const BaseUrls = {
 }
 
-BaseUrls[AppEnvironments.DEV] = "http://192.168.2.98:8080";
+BaseUrls[AppEnvironments.DEV] = "http://127.0.0.1:8080";
 BaseUrls[AppEnvironments.PROD] = "http://prod...";
 
 // --------------------------------------------------------------------------
@@ -22,6 +22,7 @@ export const LoginAPIExtensions = {
     AdminLogin: "/adminlogin",
     CandidateLogin: "/candidate/signup",
     AddQuestion:"/addquestion",
+    BulkUpload:"/bulkupload",
     ListQuestion:"/listquestion",
     UpdateQuestion:"/editquestion",
     DeleteQuestion:"/deletequestion/"

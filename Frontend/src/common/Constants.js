@@ -17,5 +17,14 @@ export const adminmenu = {
    TEXT:"text"
   };
 
+  export const questionHeaders=[
+    "question",
+    "question_type",
+    "option1",
+    "option2",
+    "option3",
+    "option4",
+    "answer_option",
+  ]
   sessionStorage.setItem('myData', '');
 // ==========================================================================
